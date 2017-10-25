@@ -20,7 +20,7 @@ function angles = supersobel(nombre, threshold)
     
     %test
     sobel = imadd(versob,horsob,'uint8');
-    sobel = sobel*3;
+    sobel = sobel-threshold;
     greenoverlay = cat(3,sobel*0,sobel,sobel*0);
     subplot(2,2,4);imshow(greenoverlay);title('Sobel');
 end
