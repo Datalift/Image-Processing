@@ -1,6 +1,11 @@
 function angles = supersobel(nombre, threshold)
-%SUPPERSOBEL Summary of this function goes here
-%   Detailed explanation goes here
+% SUPPERSOBEL Gets an input image and detects the borders by
+% means of sobel.
+
+%   The function gets an image and the border detection threshold as the parameters
+%   and shows the result for horizontal and vertical sovel and an image of the combination
+%   of the original image overlayed with the edges detected shown in green colour,
+%   it then returns a matrix with a value of angle of the derivative for each pixel.
     subplot(2,2,1);imshow(nombre);title('Imagen original');
     
     %Calculo del sobel horizontal
