@@ -11,16 +11,17 @@ function angles = supersobel(nombre, threshold)
     %Calculo del sobel horizontal
     mask = fspecial('sobel');
     horsob = conv2(mask, nombre);
+    horsob = horsob - threshold;
     subplot(2,2,2);imshow(uint8(abs(horsob)));title('Imagen Sobel horizontal');
     
     %Calculo del sobel vertical
     mask = mask';
     versob = conv2(mask, nombre);
+    versob = versob - threshold;
     subplot(2,2,3);imshow(uint8(abs(versob)));title('Imagen Sobel vertical');
     
     %test
     sobel = imadd(versob,horsob,'uint8');
-    sobel = sobel-threshold;
     greenoverlay = cat(3,sobel*0,sobel,sobel*0);
     subplot(2,2,4);imshow(greenoverlay);title('Sobel');
 end
