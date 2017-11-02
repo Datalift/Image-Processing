@@ -8,7 +8,6 @@ sigma = 2;
 threshold = 1000;
 radius = 10;
 %   Se aplica harris a ambas imágenes
-
 [ciml,rl,cl] = harris(left,sigma,threshold,radius);title('Left corners');
 [cimr,rr,cr] = harris(right,sigma,threshold,radius);title('Left corners');
 
