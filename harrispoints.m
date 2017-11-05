@@ -1,55 +1,62 @@
-%   Script para buscar puntos característicos comunes a dos imágenes,
-%   se proporcionan pepsi_left.tif y pepsi_right.tif como ejemplo.
+%   Script for finding common points between two images 
 
 left = imread('pepsi_left.tif');
 right = imread('pepsi_right.tif');
-%   Se introducen los mismos parámetros al explorar ambas imágenes
+%   We introduce the same harris parameters in both images
 sigma = 2;
 threshold = 1000;
 radius = 10;
-%   Decido el tamaño del crop
-cropsize = 17; %Square of cropsize*cropsize pixels
-centeroffset = ((cropsize-1)/2);
-%   Se aplica harris a ambas imágenes
+%   Crop size is decided
+cropsize = 17;
+
+%   Applying harris to both images
 
 [ciml,rl,cl] = harris(left,sigma,threshold,radius);title('Left corners');
 [cimr,rr,cr] = harris(right,sigma,threshold,radius);title('Left corners');
 
-subplot(2,2,1);
-imshow(left);
-hold on
-plot(cl,rl,'ro');
-
-subplot(2,2,2);
-imshow(right);
-hold on
-plot(cr,rr,'mo');
-
-%doing the crosscorelation and drawing the corelated points
 vlength = length(cl);
 
 for i = 1:vlength
-    
-    %Crop a piece of an image
+    %We crop the first image
     subplot(2,2,3);
     crop = imcrop(left,[rl(i)-cropsize,cl(i)-cropsize,cropsize,cropsize]);
     imshow(crop);
     title('Template');
     highest = [0 ,0];
     
-    %Compare with crosscorrelation
-    subplot(2,2,4);
+    h = subplot(2,2,4);
     hold on
     for j=1:vlength
-         explored = normxcorr2(crop,right);
-            if(highest(2)<=explored(2))
-                highest = explored;
-                disp(highest(2));
-            end
+        %   Comparing the cropped image from the left to the image in the
+        %   right (and store the explored)
+        explored = normxcorr2(crop,right);
+        compareme = [j, explored(cr(j),rr(j))];
+        if(highest(2)<=compareme(2))
+             highest = compareme;%  highest point is stored as candidate
+        end
         hold on
         plot(j, explored(rr(j),cr(j)),'.m');
     end
     plot(highest(1),highest(2),'*g');
+    title('Crop');
+    
+    %   Finally we draw both images overlayed with the keypoints plus the 
+    %   current point being explored
+    subplot(2,2,1);
+    imshow(left);
+    title('Keypoints detected in the left image');
+    hold on
+    plot(cl,rl,'ro');
+    rectangle('Position',[rl(i)-cropsize,cl(i)-cropsize,cropsize,cropsize],'EdgeColor','g');
+    
+    subplot(2,2,2);
+    imshow(right);
+    title('Keypoints detected in the right image');
+    hold on
+    plot(cr,rr,'bo');
+    rectangle('Position',[rr(highest(1))-cropsize,cr(highest(1))-cropsize,cropsize,cropsize],'EdgeColor','g');
     pause;
-    title('Cr');
+    delete(h);
 end
+
+
