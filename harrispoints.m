@@ -35,13 +35,21 @@ for i = 1:vlength
     crop = imcrop(left,[rl(i)-cropsize,cl(i)-cropsize,cropsize,cropsize]);
     imshow(crop);
     title('Template');
-    explored = normxcorr2(crop,right);
+    highest = [0 ,0];
     
     %Compare with crosscorrelation
     subplot(2,2,4);
+    hold on
     for j=1:vlength
+         explored = normxcorr2(crop,right);
+            if(highest(2)<=explored(2))
+                highest = explored;
+                disp(highest(2));
+            end
         hold on
         plot(j, explored(rr(j),cr(j)),'.m');
     end
+    plot(highest(1),highest(2),'*g');
+    pause;
     title('Cr');
 end

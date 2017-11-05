@@ -27,17 +27,29 @@ plot(cr,rr,'mo');
 
 %doing the crosscorelation and drawing the corelated points
 vlength = length(cl);
-disp(vlength);
 
 for i = 1:vlength
+    
+    %Crop a piece of an image
     subplot(2,2,3);
     crop = imcrop(left,[rl(i)-cropsize,cl(i)-cropsize,cropsize,cropsize]);
+    imshow(crop);
     title('Template');
-    explored = normxcorr2(crop,right);
+    highesty = [0 ,0];
     
+    %Compare with crosscorrelation
     subplot(2,2,4);
+    hold on
     for j=1:vlength
+         explored = normxcorr2(crop,right);
+            if(highest(2)<=explored(2)
+                disp(highest(2));
+                highest = explored;
+            end
         hold on
-        plot(j, explored(rr())
+        plot(j, explored(rr(j),cr(j)),'.m');
     end
+    plot(highest(1),highest(2),'*g');
+    pause;
+    title('Cr');
 end
