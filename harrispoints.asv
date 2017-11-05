@@ -27,21 +27,17 @@ plot(cr,rr,'mo');
 
 %doing the crosscorelation and drawing the corelated points
 vlength = length(cl);
+disp(vlength);
 
 for i = 1:vlength
-    
-    %Crop a piece of an image
     subplot(2,2,3);
     crop = imcrop(left,[rl(i)-cropsize,cl(i)-cropsize,cropsize,cropsize]);
-    imshow(crop);
     title('Template');
     explored = normxcorr2(crop,right);
     
-    %Compare with crosscorrelation
     subplot(2,2,4);
     for j=1:vlength
         hold on
-        plot(j, explored(rr(j),cr(j)),'.m');
+        plot(j, explored(rr())
     end
-    title('Cr');
 end
