@@ -1,13 +1,19 @@
 %   Script for finding common points between two images
 
-  left = imread('pepsi_left.tif');
-  right = imread('pepsi_right.tif');
+left = imread('pepsi_left.tif');
+right = imread('pepsi_right.tif');
 % left = imread('piezas.bmp');
 % right = imread('piezas.bmp');    
+    if size(right,3)==3
+        right = rgb2gray(right);
+    end
+    if size(left,3)==3
+        left = rgb2gray(left);
+    end
 %   We introduce the same harris parameters in both images
 sigma = 2;
 threshold = 1000;
-radius = 10;
+radius = 10;    
 %   Crop size is decided
 cropsz = 17;
 croffst = (cropsz-1)/2;
