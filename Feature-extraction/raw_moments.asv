@@ -16,14 +16,14 @@ m30 = 0;
 for x = 1:max
     for y = 1:may
         m00 = m00 + I(x,y);
-        m01 = m01 + y.^1 * I(x,y);
-        m02 = m02 + y.^2 * I(x,y);
-        m10 = m10 + x.^1 * I(x,y);
-        m11 = m11 + x.^1 * y.^1 * I(x,y);
-        m12 = m12 + x.^1 * y.^2 * I(x,y);
-        m20 = m20 + x.^2 * I(x,y);
-        m21 = m12 + x.^2 * y.^1 * I(x,y);
-        m30 = m12 + x.^3 * I(x,y);
+        m01 = m01 + y.^1 * I(xx,x);
+        m02 = m02 + y.^2 * I(y,x);
+        m10 = m10 + x.^1 * I(y,x);
+        m11 = m11 + x.^1 * y.^1 * I(y,x);
+        m12 = m12 + x.^1 * y.^2 * I(y,x);
+        m20 = m20 + x.^2 * I(y,x);
+        m21 = m12 + x.^2 * y.^1 * I(y,x);
+        m30 = m12 + x.^3 * I(y,x);
     end
 end
 disp(m00);
