@@ -1,3 +1,2 @@
 I = imread('botella_A_1.bmp');
-imshow(I);
-central_moments(I);
+HU = momentos_Hu(I);

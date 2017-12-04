@@ -17,15 +17,17 @@ m = rm;
 m01 = 0;
 m10 = 0;
 m20 = rm20 - m * x_.^2;
-m11 = rm20 - m * x_ * y_;
+m11 = rm11 - m * x_ * y_;
 m02 = rm02 - m * y_.^2;
 m30 = rm30 - 3*rm20 * x_ + 2*m * x_.^3;
+m03 = rm03 - 3*rm02*y_ + 2*m*y_.^3;
+%The following two are just initialized for the loop
 m21 = 0;
 m12 = 0;
-m03 = rm03 - 3*rm02*y_ + 2*m*y_.^3;
 for y=1:maxy
     for x=1:maxx
-        m21 = m21 + (x-x_).^2*(y-y_).^1*I(x,y);
-        m12 = m12 + (x-x_).^1*(y-y_).^2*I(x,y);
+        m21 = rm21 + (x-x_).^2*(y-y_).^1*double(I(x,y));
+        m12 = rm12 + (x-x_).^1*(y-y_).^2*double(I(x,y));
     end
 end
+return
