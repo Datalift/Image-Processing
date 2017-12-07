@@ -17,7 +17,7 @@ for x = 0:6
     centroid(x) = centroid(x)./15;
 end
 
-%Calculating Covariance Matrix
+%Calculating Covariance Matrix (There is one for each Image)
 covar_matrix = zeros(7,7);
 for i = 0:6
     for j = 0:6
