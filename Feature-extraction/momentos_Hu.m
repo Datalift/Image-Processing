@@ -11,7 +11,7 @@ function HM=momentos_Hu(I)
     I=double(I)/255;
  
     % Momentos centrales                             
-    [mu00,~,~,mu11,mu20,mu02,mu21,mu12,mu30,mu03]=central_moments(I);
+    [mu00,~,~,mu11,mu20,mu02,mu21,mu12,mu30,mu03] = central_moments(I);
  
     %Momentos normalizados
     u002 = mu00*mu00;
