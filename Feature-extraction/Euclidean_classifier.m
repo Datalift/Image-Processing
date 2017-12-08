@@ -1,29 +1,32 @@
 [a,b,c] = centroids();
-file=input('Enter the filename of a bottle image(remember the .bmp): ');
+filename=input('Enter the filename of a bottle image:','s');
+filename = [ filename '.bmp' ];
 I = imread(filename);
-[ h1, h2, ~ ] = momentos_Hu(I);
+
+h = momentos_Hu(I);
 %calculates the distance from the Hu moment to each centroid
-adistance = sqrt(((h1-a(1))^2)+((h2-a(2))^2)); 
-bdistance = sqrt(((h1-a(1))^2)+((h2-a(2))^2));
-cdistance = sqrt(((h1-a(1))^2)+((h2-a(2))^2));
+adistance = sqrt(((h(1)-a(1))^2)+((h(2)-a(2))^2)); 
+bdistance = sqrt(((h(1)-b(1))^2)+((h(2)-b(2))^2));
+cdistance = sqrt(((h(1)-c(1))^2)+((h(2)-c(2))^2));
 
 %If the distance is equal between the two smallest the distance defaults to
 %point a.
-type = 'a';
+type = 'A';
 smallest = adistance;
 if bdistance < smallest 
     smallest = bdistance;
-    type = 'b';
+    type = 'B';
+    
 end
 if cdistance < smallest
     smallest = cdistance;
-    type = 'c';
+    type = 'C';
 end
-disp('distance to A centroid is: ');
+disp('distance to A cluster centroid is: ');
 disp(adistance);
-disp('distance to B centroid is: ');
+disp('distance to B cluster centroid is: ');
 disp(bdistance);
-disp('distance to C centroid is: ');
+disp('distance to C cluster centroid is: ');
 disp(cdistance);
-disp('So we can conclude the bottle most likely is of type');
+disp('So we can conclude the bottle most likely is of type: ');
 disp(type);
