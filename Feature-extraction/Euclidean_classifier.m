@@ -16,12 +16,12 @@ smallest = adistance;
 if bdistance < smallest 
     smallest = bdistance;
     type = 'B';
-    
 end
 if cdistance < smallest
     smallest = cdistance;
     type = 'C';
 end
+
 disp('distance to A cluster centroid is: ');
 disp(adistance);
 disp('distance to B cluster centroid is: ');

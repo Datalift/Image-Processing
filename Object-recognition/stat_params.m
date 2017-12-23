@@ -17,12 +17,24 @@ for x = 0:6
     centroid(x) = centroid(x)./15;
 end
 
-%Calculating Covariance Matrix (There is one for each Image)
+% Calculating Covariance Matrix (There is one for each Image)
+% we need mu which are the means of these hu moments.
+% we have x which are the hu moments of 15 images.
+mu = zeros(7,1);
+for x = 0:14
+    for y = 0:6
+        mu(x) = mu(x) + HM(x,y); 
+    end
+    mu(x) = mu(x)/15;
+end
+
 covar_matrix = zeros(7,7);
 for i = 0:6
     for j = 0:6
-        covar_matrix(i,j) = 
+        op = HM()
+        covar_matrix = expected(op);
     end
 end
+
 return
 end
