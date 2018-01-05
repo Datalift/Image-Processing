@@ -68,7 +68,7 @@ function plotConic(K,color,xBounds,yBounds)
     end
 
   x = linspace(xBounds(1),xBounds(2),5000)';
-  [ypos yneg] = solveQuadratic(a,b,c,d,e,f,x);
+  [ypos, yneg] = solveQuadratic(a,b,c,d,e,f,x);
 
   i = find(( ~imag(ypos) | ~imag(yneg) ));    % Find bounds of soln
   leni = length(i);
@@ -84,7 +84,7 @@ function plotConic(K,color,xBounds,yBounds)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     x = linspace(xBounds(1), xBounds(2),200)';  % New x bounds
-    [ypos yneg] = solveQuadratic(a,b,c,d,e,f,x);
+    [ypos, yneg] = solveQuadratic(a,b,c,d,e,f,x);
   
     iypos = ~imag(ypos) & ypos > yBounds(1) & ypos < yBounds(2);
     iyneg = ~imag(yneg) & yneg > yBounds(1) & yneg < yBounds(2);
@@ -105,7 +105,7 @@ function plotConic(K,color,xBounds,yBounds)
     y = linspace(lower, upper, 200)'; % y bounds
 
     
-    [xpos xneg] = solveQuadratic(b,a,d,c,e,f,y);
+    [xpos, xneg] = solveQuadratic(b,a,d,c,e,f,y);
     ixpos = ~imag(xpos) & xpos > xBounds(1) & xpos < xBounds(2);
     ixneg = ~imag(xneg) & xneg > xBounds(1) & xneg < xBounds(2);
 
@@ -126,7 +126,7 @@ function plotConic(K,color,xBounds,yBounds)
   return;
 end
 
-function [yPos yNeg] = solveQuadratic(a,b,c,d,e,f, x)
+function [yPos, yNeg] = solveQuadratic(a,b,c,d,e,f, x)
   ka = b*ones(size(x));      % Quadratic coefficients of y
   kb = (e.*x + d) ;      % First degree coefficents of y
   kc = a*(x.^2) + c*x + f;    
