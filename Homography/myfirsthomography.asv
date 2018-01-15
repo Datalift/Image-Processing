@@ -2,17 +2,18 @@ I = imread('bernabeu.jpg');
 I = rgb2gray(I);
 imshow(I);
 [x,y] = ginput(4);
+% x = [836,750,117,520];
+% y = [292,664,462,258];
 for n = 1:4
     hold on
     plot(x(n),y(n),'ro');
 end
 pause(1);
-h = input('input height of the stadium');
-w = input('input width of the 
-stadium');
-h = h*20;
-w = w*20;
-x1 = [x';y';[1,1,1,1]];
+% h = input('input height of the stadium');
+% w = input('input width of the stadium');
+h = 105*20;
+w = 68*20;
+x1 = [x;y;[1,1,1,1]];
 x2 = [[w,w,1,1];[1,h,h,1];[1,1,1,1]];
 H = homography2d(x1,x2);
 
