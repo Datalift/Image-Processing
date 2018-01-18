@@ -24,13 +24,16 @@ img2 = imtransform(I, tf, 'XData',[1 h], 'YData', [1 w]);
 figure();
 imshow(img2);
 
+
 chiquito = imread('chiquito.jpg');
 chiquito = imresize(chiquito,[w h]);
 img2 = chiquito;
 imshow(img2);
+
 inv_tf = fliptform(tf);
 img2 = imtransform(chiquito, inv_tf, 'XData',[1 h], 'YData', [1 w]);
 imshow(img2);
+
 newchiquito = zeros(768,1024)
 for x = 1:768
     for y = 1:1024

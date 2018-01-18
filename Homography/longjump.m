@@ -1,8 +1,8 @@
 n = 4;
-for i = 1 : n
+for i = 0 : n
   filename = strcat('long_jump_',strcat(num2str(i),'.PNG'));
   image = imread(filename);
-  imcell{i} = rgb2gray(image);
+  imcell{i+1} = rgb2gray(image);
 end
 imshow(imcell{i});
 [x,y] = ginput(4);
@@ -23,10 +23,11 @@ x2 = [[h,h,1,1];[1,w,w,1];[1,1,1,1]];
 H = homography2d(x1,x2);
 tf = maketform('projective',H');
 figure();
-for i = 1:n
-    img2 = imtransform(imcell{i}, tf, 'XData',[1 h], 'YData', [1 w]);
+for i = 0:n
+    img2 = imtransform(imcell{i+1}, tf, 'XData',[1 h], 'YData', [1 w]);
     imshow(img2);
     [shtx,shty] = ginput(1);
     distancetoboard = width-shty*0.1;
     disp(distancetoboard);
+    pause();
 end
