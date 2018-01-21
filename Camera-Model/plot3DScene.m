@@ -24,5 +24,3 @@ scatter3(z_vec,x_vec,y_vec,5*downsample,c,'filled');
 axis equal;
 
 end
-
-
