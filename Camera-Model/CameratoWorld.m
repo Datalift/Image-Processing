@@ -11,21 +11,20 @@ ymax = y0*2+1;
 image_RGB = imread('person_rgb.png');
 imshow(image_RGB);
 image_RGB = imrotate(image_RGB, 180); % Image rotated (pinhole model). 
-pause();
+
 image_depth = imread('person_depth.png');
 imshow(image_depth); % The depth image also has to be rotated.
 image_depth = imrotate(image_depth,180);
-pause();
 
 X = zeros(ymax,xmax);
 Y = zeros(ymax,xmax);
-Z = image_depth;
+Z = zeros(ymax,xmax);
 
 for yp = 1:ymax %y prime
     for xp = 1:xmax %x prime
-        lambda = image_depth(yp,xp);
-        X(yp,xp) = lambda*((xp-0)/f);
-        Y(yp,xp) = lambda*((yp-0)/f);
+        Z(yp,xp) = double(image_depth(yp,xp))/5000;
+        X(yp,xp) = Z(yp,xp)*((xp-x0)/f);
+        Y(yp,xp) = Z(yp,xp)*((yp-y0)/f);
     end
 end
 

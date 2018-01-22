@@ -4,7 +4,9 @@ R = eye(3,3);
 Zero = zeros(3,1);
 T1 = [R t; Zero',1];
 showTransformation(T1);
-pause(2);
+
+%To the left 35º
+pause();
 t = [0;0;0];
 yaw = 0; pitch = degtorad(35); roll = 0;
 
@@ -19,7 +21,9 @@ R = Rx*Ry*Rz;
 T2 = [R t; Zero', 1];
 
 showTransformation(T2);
-pause(2);
+
+%Go up by 0.5 meters and look down
+pause();
 
 t = [0;0.5;0];
 yaw = degtorad(35); pitch = 0; roll = 0;
@@ -35,4 +39,4 @@ R = Rx*Ry*Rz;
 T3 = [R t; Zero', 1];
 
 showTransformation(T3);
-pause(2);
+pause();
