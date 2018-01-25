@@ -1,4 +1,3 @@
-downsample = 2;
 f = 525;
 kx = 1;
 ky = 1;
@@ -10,12 +9,9 @@ ymax = y0*2+1;
 
 image_RGB = imread('person_rgb.png');
 imshow(image_RGB);
-pause();
-image_RGB = imrotate(image_RGB, 180); % Image rotated (pinhole model). 
 
 image_depth = imread('person_depth.png');
-imshow(image_depth); % The depth image also has to be rotated.
-image_depth = imrotate(image_depth,180);
+imshow(image_depth); % The depth image also has to be rotated
 
 X = zeros(ymax,xmax);
 Y = zeros(ymax,xmax);
@@ -28,5 +24,12 @@ for yp = 1:ymax %y prime
         Y(yp,xp) = Z(yp,xp)*((yp-y0)/f);
     end
 end
+t = [0;0;0.5];
+R = eye(3,3);
+Zero = zeros(3,1);
+T1 = [R t; Zero',1];
+x_proj = imtransform(X, T1);
+y_proj = imtransform(Y, T1);
+image_depth = imtransform(image_depth, T1);
 
-plot3DScene(X,Y,Z,image_RGB,downsample);
+renderNewImage(x_proj,y_proj,depth_transformad,image_RGB);
