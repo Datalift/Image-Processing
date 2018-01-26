@@ -54,4 +54,6 @@ undistortedImage = undistortImage(originalImage, cameraParams);
 
 % See additional examples of how to use the calibration data.  At the prompt type:
 % showdemo('MeasuringPlanarObjectsExample')
+
+
 % showdemo('StructureFromMotionExample')

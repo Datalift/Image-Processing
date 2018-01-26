@@ -1,6 +1,7 @@
 %   Script for finding common points between two images
 left = imread('pepsi_left.tif');
 right = imread('pepsi_right.tif');
+thresh = 0.9;
 % left = imread('piezas.bmp');
 % right = imread('piezas.bmp');    
     if size(right,3)==3
@@ -63,7 +64,9 @@ vlength = length(cl);
     title('Keypoints detected in the right image');
     hold on
     plot(cr,rr,'bo');
-    rectangle('Position',[cr(higst(1))-croffst,rr(higst(1))-croffst,cropsz,cropsz],'EdgeColor','g');
+    if higst(2) > thresh
+        rectangle('Position',[cr(higst(1))-croffst,rr(higst(1))-croffst,cropsz,cropsz],'EdgeColor','g');
+    end
     pause;
     delete(h);
     end
