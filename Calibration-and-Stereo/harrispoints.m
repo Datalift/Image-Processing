@@ -1,11 +1,14 @@
-function [ ptsl, ptsr, pairedpoints ] = harrispoints( left, right, thresh )
+function [ ptsl, ptsr, pairedpts ] = harrispoints( left, right, thresh )
 %HARRISPOINTS  Function relating harris points in an image to harris
 %points in other image
-
 %   The function needs two images of same resolution, also needs a
 %   threshold (otherwise the algorithm could relate two points that are
-%   not in the same area in the real world) from 0 to 1.
-pairedpoints = 0;
+%   not in the same area in the real world) from 0 to 1.   
+%   Crop size is decided
+cropsz = 17;
+croffst = (cropsz-1)/2;
+
+pairedpts = 0;
 if size(right,3)==3
     right = rgb2gray(right);
 end
@@ -24,6 +27,7 @@ radius = 10;
 vlength = length(cl);
 
 for i = 1:vlength
+    crop = imcrop(left,[cl(i)-croffst,rl(i)-croffst,cropsz,cropsz]);
     higst = [0 ,0];
     explored = normxcorr2(crop,right);
     explored = explored((croffst)+1:(end-(croffst))-1 , (croffst)+1:(end-(croffst))-1);
@@ -38,10 +42,14 @@ for i = 1:vlength
     end
     % Saving points
     if higst(2) > thresh
-        pairedpoints = pairedpoints+1;
-        ptsl(pairedpoints) = [cl, rl];
-        ptsr(pairedpoints) = [cr(higst(1)), rr(higst(1))];
+        pairedpts = pairedpts+1;
+        ptcl(pairedpts) = cl(i);
+        ptrl(pairedpts) = rl(i);
+        ptcr(pairedpts) = cr(higst(1));
+        ptrr(pairedpts) = rr(higst(1));
     end
 end
+ptsl = [ptcl;ptrl;ones(1,pairedpts)];
+ptsr = [ptcr;ptrr;ones(1,pairedpts)];
 return
 end

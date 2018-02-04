@@ -39,5 +39,9 @@ for i= 1:pairedpts
         Y(i) = b*(x1(2,i)-cy)/di;
         Z(i) = f*b/di;
 end
-plot3DScene(X,Y,Z,right,4);
-clear;
+plot3(X,Y,Z);
+image(uint8(left));
+hold on
+image(uint8(right));
+hold on
+plot3(X,Y,Z);
