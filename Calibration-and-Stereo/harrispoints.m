@@ -4,7 +4,8 @@ function [ ptsl, ptsr, pairedpts ] = harrispoints( left, right, thresh )
 %   The function needs two images of same resolution, also needs a
 %   threshold (otherwise the algorithm could relate two points that are
 %   not in the same area in the real world) from 0 to 1.   
-%   Crop size is decided
+
+%   Crop size is decided for the xcorrelation algorithm.
 cropsz = 17;
 croffst = (cropsz-1)/2;
 

@@ -5,7 +5,7 @@ cy = 201.12;
 f = 351.32;
 left = imread('pepsi_left.tif');
 right = imread('pepsi_right.tif');
-[ x1, x2, pairedpts ] = harrispoints( left, right, 0.85 );
+[ x1, x2, pairedpts ] = harrispoints( left, right, 0.9 );
 [ F, inliers ] = ransacfitfundmatrix( x1, x2, 1e-5 );
 
 % The next code is used to test the correctness of ransacfitfundmatrix
@@ -39,5 +39,12 @@ for i= 1:pairedpts
         Y(i) = b*(x1(2,i)-cy)/di;
         Z(i) = f*b/di;
 end
-plot3DScene(X,Y,Z,right,4);
+
+scatter3(X,Y,Z);
+hold on;
+for i=1:pairedpts
+    
+   text(X(i), Y(i),Z(i), num2str(i), 'color', 'k');
+    
+end
 clear;
