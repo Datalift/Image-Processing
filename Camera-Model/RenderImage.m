@@ -9,9 +9,11 @@ ymax = y0*2+1;
 
 image_RGB = imread('person_rgb.png');
 imshow(image_RGB);
+pause;
 
 image_depth = imread('person_depth.png');
 imshow(image_depth); % The depth image also has to be rotated
+pause;
 
 X = zeros(ymax,xmax);
 Y = zeros(ymax,xmax);

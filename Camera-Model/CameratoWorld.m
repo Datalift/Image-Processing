@@ -10,11 +10,12 @@ ymax = y0*2+1;
 
 image_RGB = imread('person_rgb.png');
 imshow(image_RGB);
-pause();
+pause;
 image_RGB = imrotate(image_RGB, 180); % Image rotated (pinhole model). 
 
 image_depth = imread('person_depth.png');
 imshow(image_depth); % The depth image also has to be rotated.
+pause;
 image_depth = imrotate(image_depth,180);
 
 X = zeros(ymax,xmax);
