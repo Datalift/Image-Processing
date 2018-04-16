@@ -9,11 +9,9 @@ ymax = y0*2+1;
 
 image_RGB = imread('person_rgb.png');
 imshow(image_RGB);
-pause;
 
 image_depth = imread('person_depth.png');
 imshow(image_depth); % The depth image also has to be rotated
-pause;
 
 X = zeros(ymax,xmax);
 Y = zeros(ymax,xmax);
@@ -30,8 +28,8 @@ t = [0;0;0.5];
 R = eye(3,3);
 Zero = zeros(3,1);
 T1 = [R t; Zero',1];
-x_proj = imtransform(X, T1);
-y_proj = imtransform(Y, T1);
-image_depth = imtransform(image_depth, T1);
+x_proj = imwarp(X, T1);
+y_proj = imwarp(Y, T1);
+image_depth = imwarp(image_depth, T1);
 
 renderNewImage(x_proj,y_proj,depth_transformad,image_RGB);

@@ -1,3 +1,4 @@
+clear;
 imcell = cell(15,1);
 for i = 1 : 15
   filename = strcat('botella_A_',strcat(num2str(i),'.bmp'));
@@ -20,7 +21,7 @@ hold off
 for i = 1 : 15
   filename = strcat('botella_C_',strcat(num2str(i),'.bmp'));
   image = imread(filename);
-  imcell{i} = image;
+  imcell{i} = image; 
 end
 [centroid, covar_matrix] = stat_params(imcell);
 hold on
